@@ -7,8 +7,9 @@ public class Line extends Shape{
     private double length;
     private double angle;
 
-    public Line(double x, double y, Color color, double length, double angle) {
-        super(x, y,color);
+    public Line(double x, double y, double length, double angle) {
+        super(x, y);
+        this.color=getColor();
         this.length = length;
         this.angle = angle;
     }

@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 
 public class Hexagon extends Shape {
 
-    public Hexagon(double x, double y, Color color){
-        super(x,y,color);
+    public Hexagon(double x, double y){
+        super(x,y);
+        this.color=getColor();
     }
 
     @Override
