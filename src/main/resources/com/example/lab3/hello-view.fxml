@@ -6,11 +6,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="500.0" prefWidth="441.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab3.HelloController">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" prefHeight="572.0" prefWidth="482.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab3.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <Canvas fx:id="canvas" height="228.0" onMouseClicked="#onMouseClick" width="441.0" />
-   <TextField fx:id="textF" />
-   <ColorPicker fx:id="color" prefHeight="32.0" prefWidth="125.0" />
+    <Canvas fx:id="canvas" height="322.0" onMouseClicked="#onMouseClick" onMouseDragged="#MouseDragged" onMouseReleased="#MouseReleased" width="441.0" />
+    <TextField fx:id="textF" />
+    <ColorPicker fx:id="color" onAction="#OnClick" prefHeight="38.0" prefWidth="126.0" />
+    <Button fx:id="ButReturn" mnemonicParsing="false" onAction="#ButReturnClick" text="Назад" />
+    <Label prefHeight="66.0" prefWidth="391.0" text="Введите цифру соответствующую желаемой фигуре, выберите её цвет и щёлкните в той части экрана, где хотели бы её нарисовать    1-Линия; 2-Прямоугольник;3-Шестиугольник" wrapText="true" />
 </VBox>
