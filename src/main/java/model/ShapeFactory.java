@@ -1,14 +1,24 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiFunction;
+
 public class ShapeFactory {
-    public Shape createShape(int num,double x, double y){
-        if(num==1){
-            return new Line(x,y,200,45);
-        } else if (num==2) {
-            return new Rectangle(x,y,100,50);
-        } else if (num==3) {
-            return new Hexagon(x,y);
-        }else {
+    private Map<Integer, BiFunction<Double, Double, Shape>> shapeMap;
+
+    public ShapeFactory() {
+        shapeMap = new HashMap<>();
+        shapeMap.put(1, (x, y) -> new Line(100,100, 200, 45));
+        shapeMap.put(2, (x, y) -> new Rectangle(100,100,  100, 50));
+        shapeMap.put(3, (x, y) -> new Hexagon(100,100));
+    }
+
+    public Shape createShape(int num, double x, double y) {
+        BiFunction<Double, Double, Shape> shapeCreator = shapeMap.get(num);
+        if (shapeCreator != null) {
+            return shapeCreator.apply(x, y);
+        } else {
             return null;
         }
     }

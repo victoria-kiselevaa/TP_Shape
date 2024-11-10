@@ -31,7 +31,9 @@ public class HelloController implements Initializable {
 
         gr.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
 
-        shape=shapeFactory.createShape(Integer.parseInt(textF.getText()), x,y);
+        shape=shapeFactory.createShape(Integer.parseInt(textF.getText()),x,y);
+        shape.setX(x);
+        shape.setY(y);
         shape.setColor(color.getValue());
         shape.draw(gr);
 
