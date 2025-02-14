@@ -20,10 +20,10 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
     public Canvas canvas;
     public ColorPicker color;
-    public TextField textF=null;
+    public TextField textF = null;
     public ListView listview;
     ShapeFactory shapeFactory = new ShapeFactory();
-    Shape shape=null;
+    Shape shape = null;
     GraphicsContext gr;
     private boolean isDragging = false;
     private double dragOffsetX = 0;
@@ -34,17 +34,17 @@ public class HelloController implements Initializable {
 
     public void onMouseClick(MouseEvent mouseEvent) {
 
-        gr.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
+        gr.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        if(Integer.parseInt(textF.getText())!=0){
+        if (Integer.parseInt(textF.getText()) != 0) {
             double x = mouseEvent.getX();
             double y = mouseEvent.getY();
-            shape=shapeFactory.createShape(Integer.parseInt(textF.getText()),x,y);
+            shape = shapeFactory.createShape(Integer.parseInt(textF.getText()), x, y);
             shape.setX(x);
             shape.setY(y);
             shape.setColor(color.getValue());
             shape.draw(gr);
-        }else {
+        } else {
             drawShape(mouseEvent);
         }
         dragOffsetX = mouseEvent.getX() - shape.getX();
@@ -54,7 +54,7 @@ public class HelloController implements Initializable {
     }
 
     public void OnClick(ActionEvent actionEvent) {
-        if(shape!=null){
+        if (shape != null) {
             shape.setColor(color.getValue());
             shape.draw(gr);
             newMemento();
@@ -64,9 +64,9 @@ public class HelloController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gr = canvas.getGraphicsContext2D();
-        Rectangle rectangle=new Rectangle(100,100,  100, 50);
-        Line line = new Line(100,100,200,45);
-        Hexagon hexagon = new Hexagon(100,100);
+        Rectangle rectangle = new Rectangle(100, 100, 100, 50);
+        Line line = new Line(100, 100, 200, 45);
+        Hexagon hexagon = new Hexagon(100, 100);
         items = FXCollections.observableArrayList(rectangle, line, hexagon);
         listview.setItems(items);
         listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -112,11 +112,12 @@ public class HelloController implements Initializable {
             shape = memoSelect.poll().getState();
             gr.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             shape.draw(gr);
-        }else {
+        } else {
             newMemento();
         }
     }
-    public void newMemento(){
+
+    public void newMemento() {
         temp = new Memento(shape);
         memoSelect.push(temp);
     }
