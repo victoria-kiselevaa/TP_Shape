@@ -9,9 +9,9 @@ public class ShapeFactory {
 
     public ShapeFactory() {
         shapeMap = new HashMap<>();
-        shapeMap.put(1, (x, y) -> new Line(100,100, 200, 45));
-        shapeMap.put(2, (x, y) -> new Rectangle(100,100,  100, 50));
-        shapeMap.put(3, (x, y) -> new Hexagon(100,100));
+        shapeMap.put(1, (x, y) -> new Line(20,10, 50, 45));
+        shapeMap.put(2, (x, y) -> new Rectangle(20,20,  50, 30));
+        shapeMap.put(3, (x, y) -> new Hexagon(30,30));
     }
 
     public Shape createShape(int num, double x, double y) {

@@ -19,4 +19,18 @@ public class Rectangle extends Shape {
         gc.setFill(color);
         gc.fillRect(x, y, width, height);
     }
+    @Override
+    public String toString() {
+        return "Прямоугольник";
+    }
+
+    @Override
+    public void drawBorder(GraphicsContext gc) {
+        gc.setStroke(Color.YELLOW);
+        gc.strokeRect(x,y,width,height);
+    }
+    @Override
+    public void drawText(GraphicsContext gc) {
+        gc.fillText("Прямоугольник",x,y);
+    }
 }

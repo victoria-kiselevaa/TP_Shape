@@ -17,6 +17,23 @@ public class Line extends Shape{
     @Override
     public void draw(GraphicsContext gc) {
         gc.setStroke(color);
+
         gc.strokeLine(x,y,length,angle);
     }
+    @Override
+    public String toString() {
+        return "Линия";
+    }
+
+    @Override
+    public void drawBorder(GraphicsContext gc) {
+        gc.setStroke(Color.YELLOW);
+        gc.stroke();
+    }
+
+    @Override
+    public void drawText(GraphicsContext gc) {
+        gc.fillText("Линия",x,y);
+    }
+
 }

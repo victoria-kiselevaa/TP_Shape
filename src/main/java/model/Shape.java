@@ -51,4 +51,12 @@ public abstract class Shape implements Cloneable{
             e.printStackTrace();   }
         return clone;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    abstract public void drawBorder(GraphicsContext gc);
+    abstract public void drawText(GraphicsContext gc);
 }
