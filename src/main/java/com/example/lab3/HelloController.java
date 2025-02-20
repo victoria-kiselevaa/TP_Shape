@@ -37,6 +37,7 @@ public class HelloController implements Initializable {
     private Memento temp = null;
     double x;
     double y;
+    Composit compositeShape = new Composit(); // компоновщик фигур
     @FXML
     private ListView<Shape> listView=null;
 
@@ -51,17 +52,23 @@ public class HelloController implements Initializable {
             shape=shapeFactory.createShape(Integer.parseInt(textF.getText()),x,y);
             shape.setX(x);
             shape.setY(y);
-            shape.setColor(color.getValue());
-            shape.draw(gr);
             dragOffsetX = mouseEvent.getX() - shape.getX();
             dragOffsetY = mouseEvent.getY() - shape.getY();
+            if (shape != null) {
+                shape.setColor(color.getValue());
+                compositeShape.add(shape); // Добавляем фигуру в компоновщик
+            }
+            drawCompositeShape(); // Отрисовка всей компоновки
             newMemento();
         }else {
             drawShape(mouseEvent);
         }
 
     }
-
+    private void drawCompositeShape() {
+        gr.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        compositeShape.draw(gr); // Отрисовка всех фигур в компоновщике
+    }
     public void OnClick(ActionEvent actionEvent) {
         if(shape!=null){
             shape.setColor(color.getValue());
@@ -98,12 +105,13 @@ public class HelloController implements Initializable {
         x = mouseEvent.getX();
         y = mouseEvent.getY();
 
-        int index = listView.getSelectionModel().getSelectedIndex(); //получение индекса выбора из списка
-        Shape shape = (Shape) items.get(index).clone();// создание копии фигуры
-        shape.setColor(color.getValue());// установка цвета заполнения фигуры по значению элемента управления colorPicker
-        shape.setX(x);
-        shape.setY(y);
-        shape.draw(gr);// рисование копии фигуры в точке, полученной из события MouseEvent x
+        int index = listView.getSelectionModel().getSelectedIndex(); // получение индекса выбора из списка
+        Shape clonedShape = (Shape) items.get(index).clone(); // создание копии фигуры
+        clonedShape.setColor(color.getValue()); // установка цвета
+        clonedShape.setX(x);
+        clonedShape.setY(y);
+        compositeShape.add(clonedShape); // Добавление клонированной фигуры в компоновщик
+        drawCompositeShape(); // Отрисовка всей компоновки
     }
 
     public void MouseDragged(MouseEvent mouseEvent) {
@@ -112,8 +120,7 @@ public class HelloController implements Initializable {
             double newX = mouseEvent.getX() - dragOffsetX;
             double newY = mouseEvent.getY() - dragOffsetY;
             shape.setPosition(newX, newY);
-            gr.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-            shape.draw(gr);
+            drawCompositeShape(); // Отрисовка всей компоновки
         }
     }
 
@@ -123,8 +130,7 @@ public class HelloController implements Initializable {
             double newX = mouseEvent.getX() - dragOffsetX;
             double newY = mouseEvent.getY() - dragOffsetY;
             shape.setPosition(newX, newY);
-            gr.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-            shape.draw(gr);
+            drawCompositeShape(); // Отрисовка всей компоновки
             newMemento();
         }
     }
